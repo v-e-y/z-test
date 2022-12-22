@@ -5,3 +5,4 @@
     crossorigin="anonymous"
 >
 @stack('css')
+<link rel="stylesheet" href="{{ asset('storage/css/main.css'); }}">

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Contacts\ContactController;
 
 Route::name('contacts.')->prefix('contacts')->group(function () {
     // The list of all Contacts
