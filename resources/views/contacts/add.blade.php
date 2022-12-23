@@ -63,41 +63,46 @@
                         data-bs-parent="#accordionAccount"
                     >
                         <div class="accordion-body">
-                            <fieldset class="row">
+                            <fieldset class="row g-2">
                                 <div class="col">
-                                    <label for="Account_Name">Create new</label>
+                                    <label for="new_account">Create new</label>
                                     <input 
                                         type="text" 
-                                        name="Account_Name" 
-                                        id="Account_Name" 
+                                        name="new_account" 
+                                        id="new_account" 
                                         class="form-control form-control-sm"
-                                        placeholder="Account Name"
-                                        value="{{ old('Account_Name') }}"
+                                        placeholder="Account name"
+                                        value="{{ old('new_account') }}"
                                     >
-                                    @if ($errors->has('Account_Name'))
-                                        <div id="Account_NameFeedback" class="invalid-feedback">
-                                            {{ $errors->first('Account_Name')}}
+                                    @if ($errors->has('new_account'))
+                                        <div id="new_accountFeedback" class="invalid-feedback">
+                                            {{ $errors->first('new_account')}}
                                         </div>
                                     @endif
                                 </div>
-                                <div class="col">
-                                    <select 
-                                        class="form-select form-select-sm" 
-                                        aria-label="Select existed account"
-                                        id="Account"
-                                        name="Account"
-                                    >
-                                        <option selected>Select account</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                    @if ($errors->has('Account_Name'))
-                                        <div id="Account_NameFeedback" class="invalid-feedback">
-                                            {{ $errors->first('Account_Name')}}
-                                        </div>
-                                    @endif
-                                </div>
+                                @if ($accountRecords)
+                                    <div class="col">
+                                        <label for="existed_account">Select existed</label>
+                                        <select 
+                                            class="form-select form-select-sm" 
+                                            aria-label="Select existed account"
+                                            id="existed_account"
+                                            name="existed_account"
+                                        >
+                                            <option selected disabled hidden>Select account</option>
+                                            @foreach ($accountRecords as $record)
+                                                <option value="{{ $record->getId() }}">
+                                                    {{ $record->getKeyValue('Account_Name') }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('existed_account'))
+                                            <div id="existed_accountFeedback" class="invalid-feedback">
+                                                {{ $errors->first('existed_account')}}
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endif
                             </fieldset>
                         </div>
                     </div>

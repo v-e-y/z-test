@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Accounts;
 
-use App\Http\Controllers\Controller;
 use Asciisd\Zoho\ZohoManager;
+use App\Http\Controllers\Controller;
+use App\Services\ZohoCRMV3\Contracts\ZohoModuleEntityInterface;
 
-final class AccountController extends Controller
+final class AccountController extends Controller implements ZohoModuleEntityInterface
 {
     /**
      * @var string Zoho module name 
@@ -24,13 +25,23 @@ final class AccountController extends Controller
         $this->zohoModule = ZohoManager::useModule(self::ZOHO_MODULE_NAME);
     }
 
-    public function getRecords()
+    /**
+     * Get Accounts records
+     * @param integer $page
+     * @param integer $perPage
+     * @return array<int,com\zoho\crm\api\record\Record>
+     */
+    public function getRecords(int $page, int $perPage): array
     {
-        return $this->zohoModule->getRecords();
+        return $this->zohoModule()->getRecords(...func_get_args());
+    }
 
-        //[
-        //    'per_page' => 200,
-        //    'fealds' => 'id,Campaign_Name'
-        //]
+    /**
+     * Get Zoho module entity
+     * @return \Asciisd\Zoho\ZohoManager
+     */
+    public function zohoModule(): ZohoManager
+    {
+        return $this->zohoModule;
     }
 }
