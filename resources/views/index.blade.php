@@ -15,6 +15,7 @@
         </header>
         <main class="pt-5 pb-5">
             @include('components.errors')
+            @include('components.messages')
             @yield('main')
         </main>
         <footer>

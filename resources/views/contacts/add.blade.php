@@ -42,26 +42,67 @@
                     @endif
                 </div>
             </fieldset>
-            <fieldset>
-                <legend>
-                    Optional:
-                </legend>
-                <div class="mb-3">
-                    <input 
-                        type="text" 
-                        name="Account_Name" 
-                        id="Account_Name" 
-                        class="form-control"
-                        placeholder="Account Name"
-                        value="{{ old('Account_Name') }}"
+            <div class="accordion accordion-flush" id="accordionAccount">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button 
+                            class="accordion-button collapsed" 
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#account-collapseOne" 
+                            aria-expanded="false" 
+                            aria-controls="account-collapseOne"
+                        >
+                            Account <span class="small text-muted"> (optional)</span>
+                        </button>
+                    </h2>
+                    <div 
+                        id="account-collapseOne" 
+                        class="accordion-collapse collapse" 
+                        aria-labelledby="flush-headingOne" 
+                        data-bs-parent="#accordionAccount"
                     >
-                    @if ($errors->has('Account_Name'))
-                        <div id="Account_NameFeedback" class="invalid-feedback">
-                            {{ $errors->first('Account_Name')}}
+                        <div class="accordion-body">
+                            <fieldset class="row">
+                                <div class="col">
+                                    <label for="Account_Name">Create new</label>
+                                    <input 
+                                        type="text" 
+                                        name="Account_Name" 
+                                        id="Account_Name" 
+                                        class="form-control form-control-sm"
+                                        placeholder="Account Name"
+                                        value="{{ old('Account_Name') }}"
+                                    >
+                                    @if ($errors->has('Account_Name'))
+                                        <div id="Account_NameFeedback" class="invalid-feedback">
+                                            {{ $errors->first('Account_Name')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col">
+                                    <select 
+                                        class="form-select form-select-sm" 
+                                        aria-label="Select existed account"
+                                        id="Account"
+                                        name="Account"
+                                    >
+                                        <option selected>Select account</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    @if ($errors->has('Account_Name'))
+                                        <div id="Account_NameFeedback" class="invalid-feedback">
+                                            {{ $errors->first('Account_Name')}}
+                                        </div>
+                                    @endif
+                                </div>
+                            </fieldset>
                         </div>
-                    @endif
+                    </div>
                 </div>
-            </fieldset>
+            </div>
             <hr>
             <button type="submit" class="btn btn-outline-success">
                 Add contact
