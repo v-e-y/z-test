@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <label for="existed_account" class="form-label">
-                            Select stage
+                            Select stage*
                         </label>
                         <select 
                             class="form-select form-select-sm" 
@@ -81,24 +81,9 @@
                             @endif
                         </div>
                     @endif
-                    @if ($accountRecords || $contacts)
-                        <p class="m-0">Deal contacct</p>
-                    @endif
-                    @if ($accountRecords)
-                        <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="true" name="account_contact" id="account_contact">
-                                <label class="form-check-label" for="account_contact">
-                                    use account contact
-                                </label>
-                            </div>
-                        </div>
-                    @endif
                     @if ($contacts)
-                        <div class="col-5">
-                            Or another one:
-                        </div>
-                        <div class="col-7">
+                        <div class="col-12">
+                            <label for="Contact_Name">Deal contact*</label>
                             <select 
                                 class="form-select form-select-sm" 
                                 aria-label="Select existed account"

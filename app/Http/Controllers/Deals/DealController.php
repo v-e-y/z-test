@@ -6,16 +6,16 @@ namespace App\Http\Controllers\Deals;
 
 use Illuminate\View\View;
 use Asciisd\Zoho\ZohoManager;
+use App\Http\Requests\StoreDeal;
+use com\zoho\crm\api\record\Record;
+use com\zoho\crm\api\record\SuccessResponse;
+use Illuminate\Support\Facades\Log;
+use com\zoho\crm\api\exception\SDKException;
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Contacts\ContactController;
-use App\Http\Requests\StoreDeal;
 use App\Services\ZohoCRMV3\Contracts\ZohoModuleEntityInterface;
 use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
-use Illuminate\Http\Request;
 
-/**
- * Deal Name | Account Name | Contact Name | Closing Date | Stage | ?Type = potential
- */
 final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
@@ -53,7 +53,41 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
 
     public function store(StoreDeal $request)
     {
-        dd($request->validated());
+        /**
+         * @var array<string,mixed> form request data (filtered by null data)
+         */
+        $validatedData = array_filter($request->validated(), fn($value) => $value !== null);
+
+        /**
+         * Build Account record
+         */
+        //$accountRecord = new Record();
+        //$accountRecord->setId($validatedData['Account_Name']);
+        //$validatedData['Account_Name'] = $accountRecord;
+
+        /**
+         * Build Contact record
+         */
+        //$contactRecord = new Record();
+        //$contactRecord->setId($validatedData['Contact_Name']);
+        //$validatedData['Contact_Name'] = $contactRecord;
+
+        try {
+            $response = $this->zohoModule()->create($validatedData);
+        } catch (SDKException $th) {
+            Log::info($th->getMessage() . $th->getLine());
+            return redirect()->back()->with('message', 'Deal add error');
+        }
+
+        if ($response instanceof SuccessResponse) {
+            return redirect(
+                route('index')
+            )
+            ->with(
+                'message', 
+                $response->getStatus()->getValue() . ', ' . $response->getMessage()->getValue()
+            );
+        }
     }
 
     /**

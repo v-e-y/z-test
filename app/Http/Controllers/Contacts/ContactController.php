@@ -113,7 +113,7 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
         } catch (SDKException $th) {
             Log::info($th->getMessage() . $th->getLine());
 
-            return redirect()->back()->with('message', 'test error');
+            return redirect()->back()->with('message', 'Contact add error');
         }
         
         if ($response instanceof SuccessResponse) {

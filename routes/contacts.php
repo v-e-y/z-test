@@ -10,9 +10,11 @@ Route::name('contacts.')->prefix('contacts')->group(function () {
     Route::get('/', [ContactController::class, 'index'])
         ->name('index');
 
+    // Show create contact form
     Route::get('create', [ContactController::class, 'create'])
         ->name('create');
 
+    // Store created contact
     Route::post('create/store', [ContactController::class, 'store'])
         ->name('store');
 
