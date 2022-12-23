@@ -9,11 +9,11 @@
         <title>{{ $title ?? 'ZOHO Crm'}}</title>
         @include('components.head.css')
     </head>
-    <body class="container">
+    <body>
         <header>
-            
+            @include('components.header.nav')
         </header>
-        <main class="pt-5 pb-5">
+        <main class="pt-5 pb-5 container">
             @include('components.errors')
             @include('components.messages')
             @yield('main')

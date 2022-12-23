@@ -5,7 +5,7 @@
     @if (isset($title))
         <h1>{{ $title }}</h1>
     @endif
-    <form action="{{ route('contacts.store') }}" method="POST" class="col-12 col-md-6 card">
+    <form action="{{ route('contacts.store') }}" method="POST" class="col-12 col-md-7 col-lg-6 card">
         <section class="card-body">
             <fieldset>
                 @csrf

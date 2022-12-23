@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Deals\DealController;
 
 Route::name('deals.')->prefix('deals')->group(function () {
     // The list of all Deals

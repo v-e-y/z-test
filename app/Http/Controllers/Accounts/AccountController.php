@@ -7,8 +7,9 @@ namespace App\Http\Controllers\Accounts;
 use Asciisd\Zoho\ZohoManager;
 use App\Http\Controllers\Controller;
 use App\Services\ZohoCRMV3\Contracts\ZohoModuleEntityInterface;
+use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
 
-final class AccountController extends Controller implements ZohoModuleEntityInterface
+final class AccountController extends Controller implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
      * @var string Zoho module name 

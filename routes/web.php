@@ -11,4 +11,4 @@ Route::get('/', function () {
 
 
 require_once __DIR__ . '/contacts.php';
-//require_once __DIR__ . '/deals.php';
+require_once __DIR__ . '/deals.php';

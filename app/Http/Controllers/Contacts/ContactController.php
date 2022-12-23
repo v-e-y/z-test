@@ -1,20 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Contacts;
 
 use Illuminate\View\View;
 use Asciisd\Zoho\ZohoManager;
-use com\zoho\crm\api\exception\SDKException;
+use com\zoho\crm\api\record\Record;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreContactRequest;
+use com\zoho\crm\api\exception\SDKException;
 use com\zoho\crm\api\record\SuccessResponse;
 use App\Http\Controllers\Accounts\AccountController;
 use App\Services\ZohoCRMV3\Contracts\ZohoModuleEntityInterface;
-use com\zoho\crm\api\record\Record;
-use Illuminate\Support\Facades\Log;
+use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
 
-class ContactController extends Controller implements ZohoModuleEntityInterface
+final class ContactController extends Controller implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
      * @var string Zoho module name 
@@ -133,5 +136,16 @@ class ContactController extends Controller implements ZohoModuleEntityInterface
     public function zohoModule(): ZohoManager
     {
         return $this->zohoModule;
+    }
+
+    /**
+     * Get Contact records
+     * @param integer $page
+     * @param integer $perPage
+     * @return array<int,com\zoho\crm\api\record\Record>
+     */
+    public function getRecords(int $page, int $perPage): array
+    {
+        return $this->zohoModule()->getRecords(...func_get_args());
     }
 }
