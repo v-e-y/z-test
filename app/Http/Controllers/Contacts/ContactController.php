@@ -20,7 +20,7 @@ use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
 final class ContactController extends Controller implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
-     * @var string Zoho module name 
+     * @var string Zoho module name
      */
     public const ZOHO_MODULE_NAME = 'Contacts';
 
@@ -48,13 +48,13 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
     public function create(): View
     {
         return view(
-            'contacts.add', 
+            'contacts.add',
             [
                 'meta_title' => '',
                 'meta_description' => '',
                 'title' => 'Add contact',
                 'accountRecords' => (new AccountController())->getRecords(1, 200) ?? null
-            ]    
+            ]
         );
     }
 
@@ -99,12 +99,12 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
             // TODO add log write
         }
 
-        if (array_key_exists('existed_account', $validatedData) ) {
+        if (array_key_exists('existed_account', $validatedData)) {
             $record = new Record();
             $record->setId($validatedData['existed_account']);
             $validatedData['Account_Name'] = $record;
         }
-        
+
         /**
          * @var SuccessResponse zoho Contacts create response
          */
@@ -115,14 +115,14 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
 
             return redirect()->back()->with('message', 'Contact add error');
         }
-        
+
         if ($response instanceof SuccessResponse) {
             return redirect(
                 route('index'),
                 201
             )
             ->with(
-                'message', 
+                'message',
                 $response->getStatus()->getValue() . ', ' . $response->getMessage()->getValue()
             );
         }

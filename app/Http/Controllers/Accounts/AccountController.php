@@ -12,7 +12,7 @@ use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
 final class AccountController extends Controller implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
-     * @var string Zoho module name 
+     * @var string Zoho module name
      */
     public const ZOHO_MODULE_NAME = 'Accounts';
 

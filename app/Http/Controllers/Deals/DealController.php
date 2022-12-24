@@ -18,7 +18,7 @@ use App\Services\ZohoCRMV3\Contracts\ZohoModuleGetRecordsInterface;
 final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRecordsInterface
 {
     /**
-     * @var string Zoho module name 
+     * @var string Zoho module name
      */
     public const ZOHO_MODULE_NAME = 'Deals';
 
@@ -39,14 +39,14 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
     public function create(): View
     {
         return view(
-            'deals.add', 
+            'deals.add',
             [
                 'meta_title' => '',
                 'meta_description' => '',
                 'title' => 'Add deal',
                 'accountRecords' => (new AccountController())->getRecords(1, 200) ?? null,
                 'contacts' => (new ContactController())->getRecords(1, 200)
-            ]    
+            ]
         );
     }
 
@@ -84,11 +84,11 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
                 201
             )
             ->with(
-                'message', 
+                'message',
                 $response->getStatus()->getValue() . ', ' . $response->getMessage()->getValue()
             );
         }
-        
+
         return redirect()->back()->with('message', 'Add contact error');
     }
 
