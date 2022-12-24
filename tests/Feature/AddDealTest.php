@@ -34,7 +34,6 @@ class AddDealTest extends TestCase
             ->assertSeeText('Select stage*')
             ->assertSeeText('Deal account*')
             ->assertSeeText('Deal contact*');
-            
     }
 
     public function test_create_deal_send_form_good_data()

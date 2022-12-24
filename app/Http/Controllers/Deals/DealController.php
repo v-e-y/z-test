@@ -75,7 +75,7 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
             $response = $this->zohoModule()->create($validatedData);
         } catch (SDKException $th) {
             Log::info($th->getMessage() . $th->getLine());
-            return redirect()->back()->with('message', 'Deal add error');
+            return redirect()->back()->with('message', 'Add deal error');
         }
 
         if ($response instanceof SuccessResponse) {
@@ -89,7 +89,7 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
             );
         }
 
-        return redirect()->back()->with('message', 'Add contact error');
+        return redirect()->back()->with('message', 'Add deal error');
     }
 
     /**

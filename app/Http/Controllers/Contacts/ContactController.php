@@ -34,13 +34,6 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
         $this->zohoModule = ZohoManager::useModule(self::ZOHO_MODULE_NAME);
     }
 
-    public function index()
-    {
-        dd(
-            $this->zohoModule()->getRecords()
-        );
-    }
-
     /**
      * Show form for create zoho Contact (optional zoho Account)
      * @return \Illuminate\View\View
