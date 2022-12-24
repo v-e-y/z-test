@@ -29,10 +29,10 @@ cmd: sail up -d
 - open your browser and fill the address http://localhost:8000  
 
 
-![Home page](/storage/app/data/media/Screenshot_home.png)
+![Home page](/Screenshot_home.png)
 ### Add contact page
-![Add contact page](/storage/app/data/media/Screenshot_add_contact.png)
+![Add contact page](/Screenshot_add_contact.png)
 ### Add deal page
-![Add deal page](/storage/app/data/media/Screenshot_create_deal.png)
+![Add deal page](/Screenshot_create_deal.png)
 ### Tests
-![Tests](/storage/app/data/media/Screenshot_tests.png)
+![Tests](/Screenshot_tests.png)
