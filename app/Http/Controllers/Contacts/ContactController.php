@@ -118,7 +118,8 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
         
         if ($response instanceof SuccessResponse) {
             return redirect(
-                route('index')
+                route('index'),
+                201
             )
             ->with(
                 'message', 
@@ -126,7 +127,7 @@ final class ContactController extends Controller implements ZohoModuleEntityInte
             );
         }
 
-        return redirect()->back()->with('message', 'test error');
+        return redirect()->back()->with('message', 'Add contact error');
     }
 
     /**

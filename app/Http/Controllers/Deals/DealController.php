@@ -6,11 +6,10 @@ namespace App\Http\Controllers\Deals;
 
 use Illuminate\View\View;
 use Asciisd\Zoho\ZohoManager;
-use App\Http\Requests\StoreDeal;
-use com\zoho\crm\api\record\Record;
-use com\zoho\crm\api\record\SuccessResponse;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StoreDealRequest;
 use com\zoho\crm\api\exception\SDKException;
+use com\zoho\crm\api\record\SuccessResponse;
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Contacts\ContactController;
 use App\Services\ZohoCRMV3\Contracts\ZohoModuleEntityInterface;
@@ -51,7 +50,7 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
         );
     }
 
-    public function store(StoreDeal $request)
+    public function store(StoreDealRequest $request)
     {
         /**
          * @var array<string,mixed> form request data (filtered by null data)
@@ -81,13 +80,16 @@ final class DealController implements ZohoModuleEntityInterface, ZohoModuleGetRe
 
         if ($response instanceof SuccessResponse) {
             return redirect(
-                route('index')
+                route('index'),
+                201
             )
             ->with(
                 'message', 
                 $response->getStatus()->getValue() . ', ' . $response->getMessage()->getValue()
             );
         }
+        
+        return redirect()->back()->with('message', 'Add contact error');
     }
 
     /**
